@@ -1,0 +1,25 @@
+page:
+  eyebrow: "Get In Touch"
+  heading: "Let's Talk FW26."
+  intro: "Questions about order forms, delivery moments, shop-in-shop concepts or season preview access? Send us a message and the right person on our team will get back to you."
+
+mailto: "sales@petrolindustries.com"
+form_note: "Submitting opens your email client addressed to sales@petrolindustries.com — replace this with your live inbox or a form service before going live."
+
+info_card:
+  heading: "Petrol Industries"
+  rows:
+    - label: "Since"
+      value: "1989"
+    - label: "Segment"
+      value: "Mid-segment menswear, denim driven"
+    - label: "Countries"
+      value: "21 European sales markets"
+    - label: "Web"
+      value: "petrolindustries.com"
+      link: "https://www.petrolindustries.com"
+      external: true
+    - label: "Sales Team"
+      value: "View regional contacts →"
+      link: "contacts.html"
+      external: false

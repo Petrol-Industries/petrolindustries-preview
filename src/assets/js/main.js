@@ -119,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
         message
       ].filter(Boolean);
       const body = encodeURIComponent(bodyLines.join('\n'));
-      window.location.href = `mailto:sales@petrolindustries.com?subject=${subject}&body=${body}`;
+      const mailto = form.getAttribute('data-mailto') || 'sales@petrolindustries.com';
+      window.location.href = `mailto:${mailto}?subject=${subject}&body=${body}`;
 
       if (status) {
         status.textContent = 'Opening your email client to send this message…';

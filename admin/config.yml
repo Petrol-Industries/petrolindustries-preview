@@ -1,0 +1,181 @@
+backend:
+  name: github
+  repo: Petrol-Industries/petrol-season-preview
+  branch: main
+
+media_folder: "src/assets/img/uploads"
+public_folder: "/assets/img/uploads"
+
+site_url: "https://petrol-industries.github.io/petrol-season-preview/"
+display_url: "https://petrol-industries.github.io/petrol-season-preview/"
+
+collections:
+  - name: "home"
+    label: "Season Preview (Home Page)"
+    files:
+      - file: "src/_data/home.yaml"
+        label: "Home Page Content"
+        name: "home"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Season Label", name: "season_label", widget: "string" }
+              - { label: "Heading — Line 1", name: "heading_line1", widget: "string" }
+              - { label: "Heading — Line 2", name: "heading_line2", widget: "string" }
+              - { label: "Lede Text", name: "lede", widget: "text" }
+              - { label: "Hero Image", name: "image", widget: "image" }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+          - label: "Marquee Words"
+            name: "marquee"
+            widget: "list"
+          - label: "DNA / Brand Statement Section"
+            name: "dna"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Paragraphs", name: "paragraphs", widget: "list" }
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image Alt Text", name: "image_alt", widget: "string" }
+              - { label: "Image Tag (small badge on photo)", name: "image_tag", widget: "string" }
+          - label: "Brand Values"
+            name: "values"
+            widget: "list"
+            fields:
+              - { label: "Number", name: "num", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "Gallery"
+            name: "gallery"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Gallery Items"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Image", name: "image", widget: "image" }
+                  - { label: "Alt Text (for accessibility)", name: "alt", widget: "string" }
+                  - { label: "Caption", name: "caption", widget: "string" }
+                  - label: "Size"
+                    name: "size"
+                    widget: "select"
+                    options: ["normal", "tall", "wide"]
+                    default: "normal"
+                    hint: "normal = standard tile, tall = taller portrait tile, wide = full-width banner"
+                  - label: "Crop — Horizontal focus (%)"
+                    name: "focal_x"
+                    widget: "number"
+                    valueType: "int"
+                    min: 0
+                    max: 100
+                    default: 50
+                    hint: "0 = crop shows the left edge, 100 = crop shows the right edge, 50 = centered"
+                  - label: "Crop — Vertical focus (%)"
+                    name: "focal_y"
+                    widget: "number"
+                    valueType: "int"
+                    min: 0
+                    max: 100
+                    default: 50
+                    hint: "0 = crop shows the top, 100 = crop shows the bottom, 50 = centered"
+          - label: "Stats (Facts & Figures)"
+            name: "stats"
+            widget: "list"
+            fields:
+              - { label: "Prefix (optional, e.g. >)", name: "prefix", widget: "string", required: false }
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "Bottom Call-to-Action Band"
+            name: "cta"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Text", name: "text", widget: "text" }
+
+  - name: "contacts"
+    label: "Sales Contacts Page"
+    files:
+      - file: "src/_data/contacts.yaml"
+        label: "Sales Contacts Content"
+        name: "contacts"
+        fields:
+          - label: "Page Header"
+            name: "page"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+          - label: "Contact Groups"
+            name: "groups"
+            widget: "list"
+            fields:
+              - { label: "Group Label (e.g. Netherlands)", name: "label", widget: "string" }
+              - label: "People"
+                name: "people"
+                widget: "list"
+                fields:
+                  - { label: "Region / Role", name: "region", widget: "string" }
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Email", name: "email", widget: "string" }
+                  - { label: "Phone (as displayed)", name: "phone_display", widget: "string" }
+                  - { label: "Phone (for click-to-call, e.g. +31612345678)", name: "phone_tel", widget: "string" }
+          - { label: "Footnote", name: "footnote", widget: "text" }
+
+  - name: "contact"
+    label: "Contact Form Page"
+    files:
+      - file: "src/_data/contact.yaml"
+        label: "Contact Page Content"
+        name: "contact"
+        fields:
+          - label: "Page Header"
+            name: "page"
+            widget: "object"
+            fields:
+              - { label: "Eyebrow", name: "eyebrow", widget: "string" }
+              - { label: "Heading", name: "heading", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+          - { label: "Form Recipient Email", name: "mailto", widget: "string" }
+          - { label: "Form Note (small print under Submit)", name: "form_note", widget: "text" }
+          - label: "Info Card (right-hand box)"
+            name: "info_card"
+            widget: "object"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string" }
+              - label: "Rows"
+                name: "rows"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Value", name: "value", widget: "string" }
+                  - { label: "Link (optional)", name: "link", widget: "string", required: false }
+                  - { label: "Opens in new tab?", name: "external", widget: "boolean", default: false, required: false }
+
+  - name: "site"
+    label: "Site-Wide Settings"
+    files:
+      - file: "src/_data/site.yaml"
+        label: "Global Settings"
+        name: "site"
+        fields:
+          - label: "Brand"
+            name: "brand"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Countries List", name: "countries", widget: "text" }
+              - { label: "Legal Line (left)", name: "legal", widget: "string" }
+              - { label: "Legal Line (right)", name: "legal_right", widget: "string" }

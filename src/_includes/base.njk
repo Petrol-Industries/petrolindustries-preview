@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="/assets/img/brand/favicon.png">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+
+<header class="topbar{% if darkPage %} is-dark-page{% endif %}">
+  <nav class="nav-links" id="nav-links">
+    <a href="index.html"{% if activeNav == "season" %} class="is-active"{% endif %}>Season Preview</a>
+    <a href="contacts.html"{% if activeNav == "contacts" %} class="is-active"{% endif %}>Sales Contacts</a>
+    <a href="contact.html"{% if activeNav == "contact" %} class="is-active"{% endif %}>Contact</a>
+  </nav>
+  <a href="index.html" class="nav-logo"><img src="/assets/img/brand/logo-ellipse.png" alt="Petrol Industries"></a>
+  <a href="contact.html" class="nav-cta">Request Access</a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+</header>
+
+{{ content | safe }}
+
+{% if fullFooter %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="index.html" class="nav-logo"><img src="/assets/img/brand/logo-script-white.png" alt="Petrol Industries" style="height:34px;width:auto;"></a>
+        <span class="brand-tagline">{{ site.brand.tagline }}</span>
+        <p>{{ site.footer.description }}</p>
+      </div>
+      <div>
+        <h4>Navigate</h4>
+        <ul>
+          <li><a href="index.html">Season Preview</a></li>
+          <li><a href="contacts.html">Sales Contacts</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Collection</h4>
+        <ul>
+          <li><a href="index.html#gallery">FW26 Campaign</a></li>
+          <li><a href="contact.html">Order Forms</a></li>
+          <li><a href="contacts.html">Account Managers</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Where We Sell</h4>
+        <p class="footer__countries">{{ site.footer.countries }}</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>{{ site.footer.legal }}</span>
+      <span>{{ site.footer.legal_right }}</span>
+    </div>
+  </div>
+</footer>
+{% else %}
+<footer class="footer">
+  <div class="container">
+    <div class="footer__bottom" style="border-top:1px solid rgba(241,236,225,0.14);padding-top:26px;">
+      <span>{{ site.footer.legal }}</span>
+      <span>{{ site.footer.legal_right }}</span>
+    </div>
+  </div>
+</footer>
+{% endif %}
+
+<script src="/assets/js/main.js"></script>
+</body>
+</html>

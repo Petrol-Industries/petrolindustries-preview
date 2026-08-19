@@ -1,0 +1,15 @@
+{
+  "name": "petrol-season-preview",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Petrol Industries FW26 B2B season preview site",
+  "scripts": {
+    "build": "eleventy",
+    "serve": "eleventy --serve",
+    "debug": "DEBUG=Eleventy* eleventy"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1",
+    "js-yaml": "^4.1.0"
+  }
+}

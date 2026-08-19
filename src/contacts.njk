@@ -1,0 +1,43 @@
+---
+layout: base.njk
+title: "Sales Contacts — Petrol Industries FW26"
+description: "Regional sales contacts for Petrol Industries B2B partners."
+activeNav: "contacts"
+darkPage: true
+fullFooter: false
+permalink: "contacts.html"
+---
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ contacts.page.eyebrow }}</div>
+    <h1>{{ contacts.page.heading }}</h1>
+    <p>{{ contacts.page.intro }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    {% for group in contacts.groups %}
+    <div class="eyebrow reveal" style="margin:{% if loop.first %}0 0 20px{% else %}64px 0 20px{% endif %};">{{ group.label }}</div>
+    <div class="contacts-grid reveal">
+      {% for person in group.people %}
+      <div class="contact-card">
+        <div>
+          <div class="contact-card__region">{{ person.region }}</div>
+          <div class="contact-card__box">
+            <strong>{{ person.name }}</strong>
+            <a href="mailto:{{ person.email }}">{{ person.email }}</a><br>
+            <a href="tel:{{ person.phone_tel }}">{{ person.phone_display }}</a>
+          </div>
+        </div>
+        <button class="vcard-btn" data-vcard data-name="{{ person.name }}" data-role="{{ person.region }}" data-email="{{ person.email }}" data-phone="{{ person.phone_tel }}">Download Contact</button>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+
+    <p class="form-note reveal" style="margin-top:48px;max-width:640px;">{{ contacts.footnote }}</p>
+    <a href="contact.html" class="btn btn--dark reveal" style="margin-top:18px;">Go to Contact Form</a>
+  </div>
+</section>

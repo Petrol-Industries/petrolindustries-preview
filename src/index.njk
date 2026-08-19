@@ -1,0 +1,101 @@
+---
+layout: base.njk
+title: "Petrol Industries — FW26 Season Preview"
+description: "Petrol Industries FW26 season preview for B2B partners. Denim driven since 1989."
+activeNav: "season"
+darkPage: false
+fullFooter: true
+permalink: "index.html"
+---
+<section class="hero">
+  <div class="hero__media"><img src="{{ home.hero.image }}" alt="{{ home.hero.image_alt }}"></div>
+  <div class="hero__scrim"></div>
+  <div class="hero__content">
+    <div class="hero__season">{{ home.hero.season_label }}</div>
+    <h1>{{ home.hero.heading_line1 }}<br>{{ home.hero.heading_line2 }}</h1>
+    <p class="hero__lede">{{ home.hero.lede }}</p>
+    <div class="hero__actions">
+      <a href="#gallery" class="btn btn--solid">View the Collection</a>
+      <a href="contact.html" class="btn btn--outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero__scroll"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<div class="marquee">
+  <div class="marquee__track">
+    {% for item in home.marquee %}<span>{{ item }}</span>{% endfor %}
+    {% for item in home.marquee %}<span>{{ item }}</span>{% endfor %}
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="dna reveal">
+      <div class="dna__media">
+        <img src="{{ home.dna.image }}" alt="{{ home.dna.image_alt }}">
+        <div class="tag">{{ home.dna.image_tag }}</div>
+      </div>
+      <div class="dna__copy">
+        <div class="eyebrow">{{ home.dna.eyebrow }}</div>
+        <h2>{{ home.dna.heading }}</h2>
+        {% for p in home.dna.paragraphs %}<p>{{ p }}</p>{% endfor %}
+        <blockquote>"{{ home.dna.quote }}"</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="container">
+    <div class="eyebrow reveal">Brand Values</div>
+    <div class="values__grid reveal">
+      {% for value in home.values %}
+      <div class="values__item"><span class="values__num">{{ value.num }}</span><h3>{{ value.label }}</h3></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="gallery__head reveal">
+      <div>
+        <div class="eyebrow">{{ home.gallery.eyebrow }}</div>
+        <h2>{{ home.gallery.heading }}</h2>
+      </div>
+      <p>{{ home.gallery.intro }}</p>
+    </div>
+    <div class="gallery reveal">
+      {% for item in home.gallery.items %}
+      <div class="gallery__item{% if item.size == 'wide' %} wide{% elif item.size == 'tall' %} tall{% endif %}" data-lightbox="{{ item.image }}">
+        <img src="{{ item.image }}" loading="lazy" alt="{{ item.alt }}" style="object-position:{{ item.focal_x | default(50) }}% {{ item.focal_y | default(50) }}%;">
+        <span class="cap">{{ item.caption }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--dark section--tight">
+  <div class="container">
+    <div class="eyebrow reveal">Facts &amp; Figures</div>
+    <div class="stats reveal">
+      {% for stat in home.stats %}
+      <div class="stats__item"><div class="stats__num">{% if stat.prefix %}<span>{{ stat.prefix }}</span>{% endif %}{{ stat.value }}</div><div class="stats__label">{{ stat.label }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band reveal">
+  <div class="eyebrow" style="color:var(--red)">{{ home.cta.eyebrow }}</div>
+  <h2>{{ home.cta.heading }}</h2>
+  <p>{{ home.cta.text }}</p>
+  <a href="contact.html" class="btn btn--solid">Contact Sales</a>
+</section>
+
+<div class="lightbox">
+  <button class="lightbox__close">Close ✕</button>
+  <img src="" alt="Expanded campaign image">
+</div>

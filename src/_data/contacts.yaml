@@ -1,0 +1,51 @@
+page:
+  eyebrow: "Sales Team"
+  heading: "Your Regional Contact."
+  intro: "Every market has a dedicated account manager. Save a contact card straight to your phone, or reach out directly for FW26 order forms, delivery moments and shop-in-shop support."
+
+groups:
+  - label: "Leadership"
+    people:
+      - region: "Chief Sales Officer"
+        name: "Daniel Gonzalez Docal"
+        email: "dgonzalez@petrolindustries.com"
+        phone_display: "+31 6 45 26 72 15"
+        phone_tel: "+31645267215"
+
+  - label: "Netherlands"
+    people:
+      - region: "Sales Manager NL"
+        name: "Ruel Tirtotaroeno"
+        email: "ruel@petrolindustries.com"
+        phone_display: "+31 6 51 58 52 11"
+        phone_tel: "+31651585211"
+      - region: "Account Manager NL — North"
+        name: "Vhinoodj Permaul"
+        email: "Vhinoodj@petrolindustries.com"
+        phone_display: "+31 6 53 79 67 81"
+        phone_tel: "+31653796781"
+      - region: "Account Manager NL — South"
+        name: "Thijs Deckers"
+        email: "Tdeckers@petrolindustries.com"
+        phone_display: "+31 6 27 47 95 29"
+        phone_tel: "+31627479529"
+
+  - label: "International"
+    people:
+      - region: "Belgium"
+        name: "Stefan Moons"
+        email: "smoons@petrolindustries.com"
+        phone_display: "+32 491 28 85 26"
+        phone_tel: "+32491288526"
+      - region: "France"
+        name: "Fabien Poncet"
+        email: "fabien@petrolindustries.com"
+        phone_display: "+33 6 03 16 54 57"
+        phone_tel: "+33603165457"
+      - region: "Country Manager DACH"
+        name: "Bertram Laufer"
+        email: "bertram@petrolindustries.com"
+        phone_display: "+49 170 9104359"
+        phone_tel: "+491709104359"
+
+footnote: "Not sure who to contact? Use the general enquiry form and we'll route your message to the right account manager."

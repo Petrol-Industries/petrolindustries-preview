@@ -1,0 +1,59 @@
+---
+layout: base.njk
+title: "Contact — Petrol Industries FW26"
+description: "Get in touch with Petrol Industries for FW26 B2B orders and season preview access."
+activeNav: "contact"
+darkPage: true
+fullFooter: false
+permalink: "contact.html"
+---
+<section class="page-head">
+  <div class="container">
+    <div class="eyebrow">{{ contact.page.eyebrow }}</div>
+    <h1>{{ contact.page.heading }}</h1>
+    <p>{{ contact.page.intro }}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <div class="reveal">
+        <form id="contact-form" data-mailto="{{ contact.mailto }}" novalidate>
+          <div class="form-field">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input type="text" id="f-name" name="name" placeholder="Your name..." required>
+          </div>
+          <div class="form-field">
+            <label for="f-company">Company</label>
+            <input type="text" id="f-company" name="company" placeholder="Your company...">
+          </div>
+          <div class="form-field">
+            <label for="f-email">Email Address <span class="req">*</span></label>
+            <input type="email" id="f-email" name="email" placeholder="Your email address..." required>
+          </div>
+          <div class="form-field">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" placeholder="Your phone number...">
+          </div>
+          <div class="form-field">
+            <label for="f-message">Message <span class="req">*</span></label>
+            <textarea id="f-message" name="message" rows="6" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Submit</button>
+          <p class="form-status"></p>
+          <p class="form-note">{{ contact.form_note }}</p>
+        </form>
+      </div>
+
+      <div class="info-card reveal">
+        <h3>{{ contact.info_card.heading }}</h3>
+        {% for row in contact.info_card.rows %}
+        <div class="row"><strong>{{ row.label }}</strong> {% if row.link %}<a href="{{ row.link }}"{% if row.external %} target="_blank" rel="noopener"{% endif %}>{{ row.value }}</a>{% else %}{{ row.value }}{% endif %}</div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+</section>
