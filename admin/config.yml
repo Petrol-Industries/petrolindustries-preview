@@ -65,9 +65,9 @@ collections:
                   - label: "Size"
                     name: "size"
                     widget: "select"
-                    options: ["normal", "tall", "wide"]
+                    options: ["normal", "wide"]
                     default: "normal"
-                    hint: "normal = standard tile, tall = taller portrait tile, wide = full-width banner"
+                    hint: "normal = 3:4 portrait tile (3 per row), wide = full-width 3:2 banner. Pattern: banner, then two rows of three portraits, then a closing banner."
                   - label: "Crop — Horizontal focus (%)"
                     name: "focal_x"
                     widget: "number"

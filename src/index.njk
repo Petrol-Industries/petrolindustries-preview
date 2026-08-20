@@ -68,7 +68,7 @@ permalink: "index.html"
     </div>
     <div class="gallery reveal">
       {% for item in home.gallery.items %}
-      <div class="gallery__item{% if item.size == 'wide' %} wide{% elif item.size == 'tall' %} tall{% endif %}" data-lightbox="{{ item.image }}">
+      <div class="gallery__item{% if item.size == 'wide' %} wide{% endif %}" data-lightbox="{{ item.image }}">
         <img src="{{ item.image }}" loading="lazy" alt="{{ item.alt }}" style="object-position:{{ item.focal_x | default(50) }}% {{ item.focal_y | default(50) }}%;">
         <span class="cap">{{ item.caption }}</span>
       </div>

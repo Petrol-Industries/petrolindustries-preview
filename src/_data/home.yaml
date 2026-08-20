@@ -3,8 +3,8 @@ hero:
   heading_line1: "Denim"
   heading_line2: "Driven."
   lede: "The new season, built on the same motor-centric DNA we've run on since 1989. Rough, authentic, practical gear for the guy who tunes into his inner petrolhead."
-  image: "assets/img/fw26_240.jpg"
-  image_alt: "Petrol Industries FW26 campaign, three models by a vintage pick-up truck at an industrial site"
+  image: "assets/img/fw26_092.jpg"
+  image_alt: "Petrol Industries FW26 campaign, three models by a vintage pick-up truck at an industrial steelworks"
 
 marquee:
   - "Rough"
@@ -50,31 +50,25 @@ gallery:
   intro: "Shot on location among quarries, steelworks and vintage pick-ups — the visual world of the new collection, ready for your B2B assets and in-store storytelling."
   items:
     - image: "assets/img/fw26_234.jpg"
-      alt: "Model in a quarry with a vintage red Ford pick-up truck"
-      caption: "Quarry / Look 12"
+      alt: "Model sitting in the open door of a vintage red pick-up truck at a quarry"
+      caption: "Quarry Stop / Look 12"
       size: "wide"
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26__2.jpg"
-      alt: "Model walking in front of an industrial steelworks with a red pick-up truck"
+    - image: "assets/img/fw26_029.jpg"
+      alt: "Model in a plaid jacket leaning against a vintage pick-up truck at an industrial steelworks"
       caption: "Steelworks / Look 03"
-      size: "tall"
+      size: "normal"
       focal_x: 50
       focal_y: 50
     - image: "assets/img/fw26_042.jpg"
-      alt: "Model sitting on the hood of a vintage red pick-up truck"
+      alt: "Model sitting on the hood of a vintage red pick-up truck at a steelworks"
       caption: "Industrial Yard / Look 07"
       size: "normal"
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_029.jpg"
-      alt: "Model jumping off a vintage pick-up truck near a factory chimney"
-      caption: "Action / Look 05"
-      size: "normal"
-      focal_x: 50
-      focal_y: 50
     - image: "assets/img/fw26_026.jpg"
-      alt: "Model in a navy padded coat next to a vintage red pick-up truck"
+      alt: "Model in a navy coat walking in front of a vintage red pick-up truck"
       caption: "Layering / Look 02"
       size: "normal"
       focal_x: 50
@@ -85,22 +79,22 @@ gallery:
       size: "normal"
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26__7.jpg"
-      alt: "Close-up of a model wearing a Petrol trucker cap while driving a vintage truck"
-      caption: "Detail / Trucker Cap"
-      size: "tall"
+    - image: "assets/img/fw26_240.jpg"
+      alt: "Model carrying a red jerry can on a quarry road"
+      caption: "On the Road / Look 14"
+      size: "normal"
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_240.jpg"
-      alt: "Three models leaning against a vintage red pick-up truck at a steelworks"
-      caption: "Group Shot / FW26"
-      size: "wide"
+    - image: "assets/img/fw26_054.jpg"
+      alt: "Model in an ombre knit sweater inside an industrial warehouse"
+      caption: "Warehouse / Look 06"
+      size: "normal"
       focal_x: 50
       focal_y: 50
     - image: "assets/img/fw26_266.jpg"
-      alt: "Model carrying a jerry can beside a vintage car in a quarry"
-      caption: "On the Road / Look 14"
-      size: "normal"
+      alt: "Model sitting on the roof of a vintage pick-up truck overlooking a quarry lake"
+      caption: "Overlook / Closing Look"
+      size: "wide"
       focal_x: 50
       focal_y: 50
 
