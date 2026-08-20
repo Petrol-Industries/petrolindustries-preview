@@ -20,7 +20,7 @@ permalink: "contact.html"
     <div class="contact-layout">
 
       <div class="reveal">
-        <form id="contact-form" data-mailto="{{ contact.mailto }}" novalidate>
+        <form id="contact-form" data-mailto="{{ contact.mailto }}" data-endpoint="{{ contact.form_endpoint }}" data-site="{{ contact.site_key }}" novalidate>
           <div class="form-field">
             <label for="f-name">Name <span class="req">*</span></label>
             <input type="text" id="f-name" name="name" placeholder="Your name..." required>

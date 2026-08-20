@@ -114,11 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* Contact form -> mailto handoff */
+  /* Contact form -> Cloudflare Worker submission (mailto fallback) */
   const form = document.querySelector('#contact-form');
   if (form) {
     const status = document.querySelector('.form-status');
-    form.addEventListener('submit', (e) => {
+    const submitBtn = form.querySelector('.submit-btn');
+    const setStatus = (text, isError) => {
+      if (!status) return;
+      status.textContent = text;
+      status.style.color = isError ? '#ac3a24' : '#3a352c';
+      status.classList.add('is-visible');
+    };
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const data = new FormData(form);
       const name = (data.get('name') || '').toString().trim();
@@ -128,31 +136,46 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = (data.get('message') || '').toString().trim();
 
       if (!name || !email || !message) {
-        if (status) {
-          status.textContent = 'Please fill in your name, email and message.';
-          status.style.color = '#ac3a24';
-          status.classList.add('is-visible');
-        }
+        setStatus('Please fill in your name, email and message.', true);
         return;
       }
 
-      const subject = encodeURIComponent(`FW26 B2B enquiry — ${company || name}`);
-      const bodyLines = [
-        `Name: ${name}`,
-        company ? `Company: ${company}` : '',
-        `Email: ${email}`,
-        phone ? `Phone: ${phone}` : '',
-        '',
-        message
-      ].filter(Boolean);
-      const body = encodeURIComponent(bodyLines.join('\n'));
+      const endpoint = form.getAttribute('data-endpoint');
+      const site = form.getAttribute('data-site') || '';
       const mailto = form.getAttribute('data-mailto') || 'sales@petrolindustries.com';
-      window.location.href = `mailto:${mailto}?subject=${subject}&body=${body}`;
 
-      if (status) {
-        status.textContent = 'Opening your email client to send this message…';
-        status.style.color = '#3a352c';
-        status.classList.add('is-visible');
+      if (!endpoint) {
+        const subject = encodeURIComponent(`FW26 B2B enquiry — ${company || name}`);
+        const bodyLines = [
+          `Name: ${name}`,
+          company ? `Company: ${company}` : '',
+          `Email: ${email}`,
+          phone ? `Phone: ${phone}` : '',
+          '',
+          message
+        ].filter(Boolean);
+        window.location.href = `mailto:${mailto}?subject=${subject}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        setStatus('Opening your email client to send this message…', false);
+        return;
+      }
+
+      if (submitBtn) submitBtn.disabled = true;
+      setStatus('Sending…', false);
+
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, company, email, phone, message, site })
+        });
+        const result = await res.json();
+        if (!res.ok || !result.ok) throw new Error(result.error || 'Send failed');
+        setStatus("Thanks — your message has been sent. We'll be in touch soon.", false);
+        form.reset();
+      } catch (err) {
+        setStatus('Something went wrong sending your message — please email us directly instead.', true);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
     });
   }

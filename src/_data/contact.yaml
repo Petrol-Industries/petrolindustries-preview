@@ -3,8 +3,10 @@ page:
   heading: "Let's Talk FW26."
   intro: "Questions about order forms, delivery moments, shop-in-shop concepts or season preview access? Send us a message and the right person on our team will get back to you."
 
-mailto: "sales@petrolindustries.com"
-form_note: "Submitting opens your email client addressed to sales@petrolindustries.com — replace this with your live inbox or a form service before going live."
+mailto: "customerservice@petrolindustries.com"
+form_endpoint: "https://petrol-cms-auth.teun-a4c.workers.dev/contact-submit"
+site_key: "petrol"
+form_note: "Messages are sent directly to our customer service team via our contact form service."
 
 info_card:
   heading: "Petrol Industries"
