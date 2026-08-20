@@ -34,6 +34,11 @@ const SITE_RECIPIENTS = {
   indigold: "customerservice@indigoldcrafted.com",
 };
 
+const SITE_SUBJECT_PREFIXES = {
+  petrol: "Form reply Petrol Preview website:",
+  indigold: "Form reply Indigold Preview website:",
+};
+
 const ALLOWED_ORIGINS = [
   "https://petrol-industries.github.io",
   "https://preview.petrolindustries.com",
@@ -129,7 +134,8 @@ export default {
 
       const toEmail = SITE_RECIPIENTS[site] || env.CONTACT_TO_EMAIL || "sales@petrolindustries.com";
       const fromEmail = env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
-      const subject = `FW26 B2B enquiry — ${company || name}${site ? ` (${site})` : ""}`;
+      const prefix = SITE_SUBJECT_PREFIXES[site] || "Form reply:";
+      const subject = `${prefix} ${company || name}`;
       const textBody = [
         `Name: ${name}`,
         company ? `Company: ${company}` : "",
