@@ -91,12 +91,11 @@ gallery:
       size: "normal"
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_266.jpg"
-      alt: "Model sitting on the roof of a vintage pick-up truck overlooking a quarry lake"
-      caption: "Overlook / Closing Look"
+    - type: "video"
+      youtube_id: "yvyLMJbVC1M"
+      alt: "Petrol Heritage — brand film"
+      caption: "Petrol Heritage Film"
       size: "wide"
-      focal_x: 50
-      focal_y: 50
 
 stats:
   - prefix: ">"

@@ -55,6 +55,14 @@ document.addEventListener('DOMContentLoaded', () => {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
+  /* Click-to-play YouTube facade */
+  document.querySelectorAll('[data-youtube]').forEach(el => {
+    el.addEventListener('click', () => {
+      const id = el.getAttribute('data-youtube');
+      el.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="Petrol Heritage" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen style="width:100%;height:100%;display:block;"></iframe>`;
+    }, { once: true });
+  });
+
   /* Lightbox for gallery */
   const lightbox = document.querySelector('.lightbox');
   if (lightbox) {

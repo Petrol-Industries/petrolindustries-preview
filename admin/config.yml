@@ -59,7 +59,13 @@ collections:
                 name: "items"
                 widget: "list"
                 fields:
-                  - { label: "Image", name: "image", widget: "image" }
+                  - label: "Tile Type"
+                    name: "type"
+                    widget: "select"
+                    options: ["image", "video"]
+                    default: "image"
+                    hint: "video = YouTube click-to-play tile. Fill in Image fields OR Video fields below to match."
+                  - { label: "Image", name: "image", widget: "image", required: false }
                   - { label: "Alt Text (for accessibility)", name: "alt", widget: "string" }
                   - { label: "Caption", name: "caption", widget: "string" }
                   - label: "Size"
@@ -75,7 +81,8 @@ collections:
                     min: 0
                     max: 100
                     default: 50
-                    hint: "0 = crop shows the left edge, 100 = crop shows the right edge, 50 = centered"
+                    required: false
+                    hint: "Images only. 0 = crop shows the left edge, 100 = right edge, 50 = centered"
                   - label: "Crop — Vertical focus (%)"
                     name: "focal_y"
                     widget: "number"
@@ -83,7 +90,13 @@ collections:
                     min: 0
                     max: 100
                     default: 50
-                    hint: "0 = crop shows the top, 100 = crop shows the bottom, 50 = centered"
+                    required: false
+                    hint: "Images only. 0 = crop shows the top, 100 = bottom, 50 = centered"
+                  - label: "YouTube Video ID"
+                    name: "youtube_id"
+                    widget: "string"
+                    required: false
+                    hint: "Video tiles only. The part after youtu.be/ or ?v= in the YouTube URL, e.g. yvyLMJbVC1M"
           - label: "Stats (Facts & Figures)"
             name: "stats"
             widget: "list"

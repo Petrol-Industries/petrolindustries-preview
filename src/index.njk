@@ -68,10 +68,20 @@ permalink: "index.html"
     </div>
     <div class="gallery reveal">
       {% for item in home.gallery.items %}
+      {% if item.type == 'video' %}
+      <div class="gallery__item{% if item.size == 'wide' %} wide{% endif %} gallery__item--video" data-youtube="{{ item.youtube_id }}">
+        <img src="https://img.youtube.com/vi/{{ item.youtube_id }}/maxresdefault.jpg" loading="lazy" alt="{{ item.alt }}">
+        <button class="gallery__play" aria-label="Play video">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <span class="cap">{{ item.caption }}</span>
+      </div>
+      {% else %}
       <div class="gallery__item{% if item.size == 'wide' %} wide{% endif %}" data-lightbox="{{ item.image }}">
         <img src="{{ item.image }}" loading="lazy" alt="{{ item.alt }}" style="object-position:{{ item.focal_x | default(50) }}% {{ item.focal_y | default(50) }}%;">
         <span class="cap">{{ item.caption }}</span>
       </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
