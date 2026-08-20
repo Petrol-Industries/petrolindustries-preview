@@ -65,7 +65,7 @@ gallery:
     - image: assets/img/fw26__2.jpg
       alt: Model walking in front of an industrial steelworks with a red pick-up truck
       caption: Steelworks / Look 03
-      size: tall
+      size: normal
       focal_x: 50
       focal_y: 50
     - image: assets/img/fw26_042.jpg
