@@ -1,124 +1,131 @@
 hero:
-  season_label: "Fall | Winter 2026 — B2B Preview"
-  heading_line1: "Denim"
-  heading_line2: "Driven."
-  lede: "The new season, built on the same motor-centric DNA we've run on since 1989. Rough, authentic, practical gear for the guy who tunes into his inner petrolhead."
-  image: "assets/img/fw26_240.jpg"
-  image_alt: "Petrol Industries FW26 campaign, three models by a vintage pick-up truck at an industrial site"
-
+  season_label: Fall | Winter 2026 — B2B Preview
+  heading_line1: Denim
+  heading_line2: Driven.
+  lede: The new season, built on the same motor-centric DNA we've run on since
+    1989. Rough, authentic, practical gear for the guy who tunes into his inner
+    petrolhead.
+  image: assets/img/fw26_240.jpg
+  image_alt: Petrol Industries FW26 campaign, three models by a vintage pick-up
+    truck at an industrial site
 marquee:
-  - "Rough"
-  - "Motorcentric"
-  - "Authentic"
-  - "Masculine"
-  - "Denim Driven"
-  - "Freedom & Adventure"
-  - "Practical Gear"
-
+  - Rough
+  - Motorcentric
+  - Authentic
+  - Masculine
+  - Denim Driven
+  - Freedom & Adventure
+  - Practical Gear
 dna:
-  eyebrow: "Our DNA"
-  heading: "Motor-centric thinking drives our direction."
+  eyebrow: Our DNA
+  heading: Motor-centric thinking drives our direction.
   paragraphs:
-    - "At Petrol, we've made jeans wear and denim related products since 1989 — for a fair price and high quality. The heart of our heritage is in the car scene. We're equally inspired by the past, the present and the future: we love old cars, but we also love finding new ways to keep our freedom, hunt for adventure, and stay a little rebellious."
-    - "Every season we're on the hunt for new fits and old techniques to combine them with. Denim isn't just part of our range — it's part of our identity."
-  quote: "The everyman. One of the crew. The guy of today and tomorrow."
-  image: "assets/img/fw26_054.jpg"
-  image_alt: "Petrol Industries FW26 model in an industrial warehouse, wearing a knitted sweater"
-  image_tag: "FW26 · Warehouse"
-
+    - "At Petrol, we've made jeans wear and denim related products since 1989 —
+      for a fair price and high quality. The heart of our heritage is in the car
+      scene. We're equally inspired by the past, the present and the future: we
+      love old cars, but we also love finding new ways to keep our freedom, hunt
+      for adventure, and stay a little rebellious."
+    - Every season we're on the hunt for new fits and old techniques to combine
+      them with. Denim isn't just part of our range — it's part of our identity.
+  quote: The everyman. One of the crew. The guy of today and tomorrow.
+  image: assets/img/fw26_054.jpg
+  image_alt: Petrol Industries FW26 model in an industrial warehouse, wearing a
+    knitted sweater
+  image_tag: FW26 · Warehouse
 values:
   - num: "01"
-    label: "Rough"
+    label: Rough
   - num: "02"
-    label: "Motorcentric"
+    label: Motorcentric
   - num: "03"
-    label: "Authentic"
+    label: Authentic
   - num: "04"
-    label: "Masculine"
+    label: Masculine
   - num: "05"
-    label: "Freedom & Adventure"
+    label: Freedom & Adventure
   - num: "06"
-    label: "Denim Driven"
+    label: Denim Driven
   - num: "07"
-    label: "Practical Gear"
+    label: Practical Gear
   - num: "08"
-    label: "Since 1989"
-
+    label: Since 1989
 gallery:
-  eyebrow: "FW26 Campaign"
-  heading: "The Season in Frame"
-  intro: "Shot on location among quarries, steelworks and vintage pick-ups — the visual world of the new collection, ready for your B2B assets and in-store storytelling."
+  eyebrow: FW26 Campaign
+  heading: The Season in Frame
+  intro: Shot on location among quarries, steelworks and vintage pick-ups — the
+    visual world of the new collection, ready for your B2B assets and in-store
+    storytelling.
   items:
-    - image: "assets/img/fw26_234.jpg"
-      alt: "Model in a quarry with a vintage red Ford pick-up truck"
-      caption: "Quarry / Look 12"
-      size: "wide"
+    - image: assets/img/fw26_234.jpg
+      alt: Model in a quarry with a vintage red Ford pick-up truck
+      caption: Quarry / Look 12
+      size: wide
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26__2.jpg"
-      alt: "Model walking in front of an industrial steelworks with a red pick-up truck"
-      caption: "Steelworks / Look 03"
-      size: "tall"
+    - image: assets/img/fw26__2.jpg
+      alt: Model walking in front of an industrial steelworks with a red pick-up truck
+      caption: Steelworks / Look 03
+      size: tall
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_042.jpg"
-      alt: "Model sitting on the hood of a vintage red pick-up truck"
-      caption: "Industrial Yard / Look 07"
-      size: "normal"
+    - image: assets/img/fw26_042.jpg
+      alt: Model sitting on the hood of a vintage red pick-up truck
+      caption: Industrial Yard / Look 07
+      size: normal
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_029.jpg"
-      alt: "Model jumping off a vintage pick-up truck near a factory chimney"
-      caption: "Action / Look 05"
-      size: "normal"
+    - image: assets/img/fw26_029.jpg
+      alt: Model jumping off a vintage pick-up truck near a factory chimney
+      caption: Action / Look 05
+      size: normal
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_026.jpg"
-      alt: "Model in a navy padded coat next to a vintage red pick-up truck"
-      caption: "Layering / Look 02"
-      size: "normal"
+    - image: assets/img/fw26_026.jpg
+      alt: Model in a navy padded coat next to a vintage red pick-up truck
+      caption: Layering / Look 02
+      size: normal
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_062.jpg"
-      alt: "Model in a striped knit sweater inside an industrial workshop"
-      caption: "Workshop / Look 09"
-      size: "normal"
+    - image: assets/img/fw26_062.jpg
+      alt: Model in a striped knit sweater inside an industrial workshop
+      caption: Workshop / Look 09
+      size: normal
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26__7.jpg"
-      alt: "Close-up of a model wearing a Petrol trucker cap while driving a vintage truck"
-      caption: "Detail / Trucker Cap"
-      size: "tall"
+    - image: assets/img/fw26__7.jpg
+      alt: Close-up of a model wearing a Petrol trucker cap while driving a vintage
+        truck
+      caption: Detail / Trucker Cap
+      size: tall
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_240.jpg"
-      alt: "Three models leaning against a vintage red pick-up truck at a steelworks"
-      caption: "Group Shot / FW26"
-      size: "wide"
+    - image: assets/img/fw26_240.jpg
+      alt: Three models leaning against a vintage red pick-up truck at a steelworks
+      caption: Group Shot / FW26
+      size: wide
       focal_x: 50
       focal_y: 50
-    - image: "assets/img/fw26_266.jpg"
-      alt: "Model carrying a jerry can beside a vintage car in a quarry"
-      caption: "On the Road / Look 14"
-      size: "normal"
+    - image: assets/img/fw26_266.jpg
+      alt: Model carrying a jerry can beside a vintage car in a quarry
+      caption: On the Road / Look 14
+      size: wide
       focal_x: 50
       focal_y: 50
-
 stats:
   - prefix: ">"
     value: "3.600"
-    label: "Multibrand Customers"
+    label: Multibrand Customers
   - prefix: ">"
     value: "200"
-    label: "Shop-in-Shops"
+    label: Shop-in-Shops
   - prefix: ">"
     value: "20"
-    label: "Sales Countries"
+    label: Sales Countries
   - prefix: ""
     value: "1989"
-    label: "Established"
-
+    label: Established
 cta:
-  eyebrow: "FW26 · Ready for the New Season"
-  heading: "Let's plan your FW26 order."
-  text: "Reach out to your regional account manager or send us a message — we'll get your B2B preview access and order forms sorted."
+  eyebrow: FW26 · Ready for the New Season
+  heading: Let's plan your FW26 order.
+  text: Reach out to your regional account manager or send us a message — we'll
+    get your B2B preview access and order forms sorted.
