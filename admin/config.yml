@@ -4,7 +4,7 @@ backend:
   branch: main
 
 media_folder: "src/assets/img/uploads"
-public_folder: "/assets/img/uploads"
+public_folder: "assets/img/uploads"
 
 site_url: "https://petrol-industries.github.io/petrolindustries-preview/"
 display_url: "https://petrol-industries.github.io/petrolindustries-preview/"
