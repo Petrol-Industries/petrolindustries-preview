@@ -102,9 +102,9 @@ gallery:
     - image: assets/img/fw26_240.jpg
       alt: Three models leaning against a vintage red pick-up truck at a steelworks
       caption: Group Shot / FW26
-      size: wide
+      size: tall
       focal_x: 50
-      focal_y: 25
+      focal_y: 50
     - image: assets/img/fw26_266.jpg
       alt: Model carrying a jerry can beside a vintage car in a quarry
       caption: On the Road / Look 14
