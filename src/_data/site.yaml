@@ -2,6 +2,10 @@ brand:
   name: "Petrol Industries"
   tagline: "Denim Driven · Est. 1989"
 
+access:
+  enabled: true
+  password: "Petrolss27"
+
 footer:
   description: "Mid-segment menswear, proudly mainstream, turbo-charged by our motor-centric DNA. Tough, straightforward, denim-driven garments for the guy of today and tomorrow."
   countries: "Austria · Belgium · Croatia · Cyprus · Denmark · Finland · France · Germany · Greece · Ireland · Israel · Italy · Luxembourg · Norway · Poland · Portugal · Serbia · Spain · Sweden · Switzerland · The Netherlands · United Kingdom"

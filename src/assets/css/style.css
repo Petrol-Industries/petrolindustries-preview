@@ -324,6 +324,33 @@ button{ font-family:inherit; cursor:pointer; }
 .info-card .row:first-of-type{ border-top:none; }
 .info-card .row strong{ font-family:'Oswald',sans-serif; letter-spacing:0.04em; min-width:110px; display:inline-block; color:var(--red); font-size:12.5px; text-transform:uppercase; font-weight:600; }
 
+/* ---------- Access gate ---------- */
+.gate-overlay{ display:none; }
+html.is-gated #site-content{ display:none; }
+html.is-gated .gate-overlay{
+  display:flex; position:fixed; inset:0; z-index:2000;
+  align-items:center; justify-content:center; padding:24px;
+  background:var(--navy);
+}
+.gate-overlay__box{
+  max-width:380px; width:100%; text-align:center; color:var(--paper);
+}
+.gate-overlay__logo{ height:56px; width:auto; margin:0 auto 28px; }
+.gate-overlay__box h2{ font-size:22px; margin-bottom:12px; }
+.gate-overlay__box p{ font-size:14.5px; color:rgba(241,236,225,0.75); margin-bottom:28px; font-weight:300; }
+#gate-form{ display:flex; gap:10px; }
+#gate-form input{
+  flex:1; padding:14px 16px; border:1px solid rgba(241,236,225,0.3); border-radius:2px;
+  background:rgba(241,236,225,0.06); color:var(--paper); font-family:'Roboto Slab',serif; font-size:15px;
+}
+#gate-form input::placeholder{ color:rgba(241,236,225,0.5); }
+#gate-form input:focus{ outline:none; border-color:var(--gold-cta); }
+#gate-form .btn{ padding:14px 22px; }
+.gate-overlay__error{
+  margin-top:16px; font-family:'Oswald',sans-serif; font-size:12.5px; letter-spacing:0.06em;
+  color:#ff8b7a; min-height:16px;
+}
+
 /* ---------- Lightbox ---------- */
 .lightbox{
   position:fixed; inset:0; background:rgba(6,12,24,0.94); z-index:1000;

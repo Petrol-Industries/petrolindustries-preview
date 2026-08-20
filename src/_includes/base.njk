@@ -8,9 +8,36 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="/assets/img/brand/favicon.png">
 <link rel="stylesheet" href="/assets/css/style.css">
+{% if site.access.enabled %}
+<script>
+  (function(){
+    try {
+      if (sessionStorage.getItem('petrol_gate_ok') !== '1') {
+        document.documentElement.classList.add('is-gated');
+      }
+    } catch(e) { document.documentElement.classList.add('is-gated'); }
+  })();
+</script>
+{% endif %}
 </head>
 <body>
 
+{% if site.access.enabled %}
+<div class="gate-overlay">
+  <div class="gate-overlay__box">
+    <img src="/assets/img/brand/logo-ellipse.png" alt="Petrol Industries" class="gate-overlay__logo">
+    <h2>Season Preview Access</h2>
+    <p>This preview is for invited B2B partners only. Enter the access code to continue.</p>
+    <form id="gate-form" novalidate>
+      <input type="password" id="gate-password" placeholder="Access code" autocomplete="off">
+      <button type="submit" class="btn btn--solid">Enter</button>
+    </form>
+    <p class="gate-overlay__error"></p>
+  </div>
+</div>
+{% endif %}
+
+<div id="site-content">
 <header class="topbar{% if darkPage %} is-dark-page{% endif %}">
   <nav class="nav-links" id="nav-links">
     <a href="index.html"{% if activeNav == "season" %} class="is-active"{% endif %}>Season Preview</a>
@@ -70,7 +97,11 @@
   </div>
 </footer>
 {% endif %}
+</div>
 
+{% if site.access.enabled %}
+<script>window.__PETROL_GATE_PASSWORD__ = {{ site.access.password | dump | safe }};</script>
+{% endif %}
 <script src="/assets/js/main.js"></script>
 </body>
 </html>

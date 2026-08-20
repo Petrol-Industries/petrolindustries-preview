@@ -1,6 +1,25 @@
 // PETROL INDUSTRIES — FW26 B2B Season Preview
 document.addEventListener('DOMContentLoaded', () => {
 
+  /* Access gate */
+  const gateForm = document.querySelector('#gate-form');
+  if (gateForm) {
+    const errorEl = document.querySelector('.gate-overlay__error');
+    const input = document.querySelector('#gate-password');
+    gateForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const expected = window.__PETROL_GATE_PASSWORD__ || '';
+      if (input.value === expected) {
+        try { sessionStorage.setItem('petrol_gate_ok', '1'); } catch (err) {}
+        document.documentElement.classList.remove('is-gated');
+      } else {
+        errorEl.textContent = 'Incorrect access code — please try again.';
+        input.value = '';
+        input.focus();
+      }
+    });
+  }
+
   /* Top bar scroll state */
   const topbar = document.querySelector('.topbar');
   const onScroll = () => {
