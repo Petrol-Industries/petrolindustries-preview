@@ -1,13 +1,13 @@
 backend:
   name: github
-  repo: Petrol-Industries/petrol-season-preview
+  repo: Petrol-Industries/petrolindustries-preview
   branch: main
 
 media_folder: "src/assets/img/uploads"
 public_folder: "/assets/img/uploads"
 
-site_url: "https://petrol-industries.github.io/petrol-season-preview/"
-display_url: "https://petrol-industries.github.io/petrol-season-preview/"
+site_url: "https://petrol-industries.github.io/petrolindustries-preview/"
+display_url: "https://petrol-industries.github.io/petrolindustries-preview/"
 
 collections:
   - name: "home"
