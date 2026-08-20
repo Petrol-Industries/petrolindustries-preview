@@ -104,12 +104,12 @@ gallery:
       caption: Group Shot / FW26
       size: wide
       focal_x: 50
-      focal_y: 0
+      focal_y: 5
     - image: assets/img/fw26_266.jpg
       alt: Model carrying a jerry can beside a vintage car in a quarry
       caption: On the Road / Look 14
       size: wide
-      focal_x: 50
+      focal_x: 25
       focal_y: 50
 stats:
   - prefix: ">"
