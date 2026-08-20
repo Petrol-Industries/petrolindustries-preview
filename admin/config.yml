@@ -2,6 +2,7 @@ backend:
   name: github
   repo: Petrol-Industries/petrolindustries-preview
   branch: main
+  base_url: https://petrol-cms-auth.teun-a4c.workers.dev
 
 media_folder: "src/assets/img/uploads"
 public_folder: "assets/img/uploads"
