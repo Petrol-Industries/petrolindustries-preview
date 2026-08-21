@@ -115,7 +115,7 @@
   function imageField(labelText, imagePath, altPath, altValue) {
     const wrap = h("div", { class: "sf-field sf-image-field" });
     wrap.appendChild(h("label", { text: labelText }));
-    const preview = h("img", { src: `../${imagePath}`, class: "sf-preview" });
+    const preview = h("img", { src: `../${imagePath}?t=${Date.now()}`, class: "sf-preview" });
     const fileInput = h("input", { type: "file", accept: "image/*" });
     const status = h("span", { class: "sf-status" });
     fileInput.addEventListener("change", async () => {

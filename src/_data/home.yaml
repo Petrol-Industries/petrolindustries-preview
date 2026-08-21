@@ -93,7 +93,7 @@ gallery:
       size: normal
       focal_x: 50
       focal_y: 50
-    - image: assets/img/fw26_054.jpg
+    - image: assets/img/fw26_054_gallery.jpg
       alt: Model in an ombre knit sweater inside an industrial warehouse
       caption: Warehouse / Look 06
       size: normal
