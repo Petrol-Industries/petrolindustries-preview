@@ -124,7 +124,9 @@
       status.textContent = "Uploading…";
       status.className = "sf-status";
       try {
-        const contentBase64 = await fileToBase64(file);
+        status.textContent = "Compressing…";
+        const contentBase64 = await compressImageForUpload(file, imagePath);
+        status.textContent = "Uploading…";
         // imagePath is the site-relative URL used in the built page (e.g.
         // "assets/img/x.jpg"); the actual repo path is under src/, since
         // Eleventy's input dir is "src".
@@ -152,13 +154,41 @@
     return wrap;
   }
 
-  function fileToBase64(file) {
+  function blobToBase64(blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result.split(",")[1]);
       reader.onerror = reject;
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(blob);
     });
+  }
+
+  const MAX_DIMENSION = 2000;
+  const JPEG_QUALITY = 0.85;
+
+  // Resizes/re-encodes an uploaded photo client-side before it ever leaves the
+  // browser — phone photos are routinely 10-50MB, which would otherwise get
+  // committed to the repo as-is and make the page unusably slow to load.
+  async function compressImageForUpload(file, targetPath) {
+    const isPng = /\.png$/i.test(targetPath);
+    const bitmap = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_DIMENSION / Math.max(bitmap.width, bitmap.height));
+    const w = Math.round(bitmap.width * scale);
+    const h = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const ctx = canvas.getContext("2d");
+    if (!isPng) {
+      // Flatten onto white first — JPEG has no alpha channel, and a
+      // transparent PNG source would otherwise turn black.
+      ctx.fillStyle = "#ffffff";
+      ctx.fillRect(0, 0, w, h);
+    }
+    ctx.drawImage(bitmap, 0, 0, w, h);
+    const mime = isPng ? "image/png" : "image/jpeg";
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, mime, JPEG_QUALITY));
+    return blobToBase64(blob);
   }
 
   // ---------- Section renderers ----------
