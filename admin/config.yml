@@ -64,6 +64,7 @@ collections:
                     widget: "select"
                     options: ["image", "video"]
                     default: "image"
+                    required: false
                     hint: "video = YouTube click-to-play tile. Fill in Image fields OR Video fields below to match."
                   - { label: "Image", name: "image", widget: "image", required: false }
                   - { label: "Alt Text (for accessibility)", name: "alt", widget: "string" }
