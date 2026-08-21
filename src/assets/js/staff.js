@@ -454,7 +454,14 @@
 
   function showLogin(message) {
     app.innerHTML = "";
-    const userInput = h("input", { type: "text", placeholder: "Username", autocomplete: "username" });
+    const userInput = h("input", {
+      type: "text",
+      placeholder: "Username",
+      autocomplete: "username",
+      autocapitalize: "off",
+      autocorrect: "off",
+      spellcheck: "false",
+    });
     const passInput = h("input", { type: "password", placeholder: "Password", autocomplete: "current-password" });
     const status = h("p", { class: "sf-status" });
     if (message) status.textContent = message;
@@ -473,7 +480,7 @@
         const res = await fetch(CONFIG.apiBase + "/staff-login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: userInput.value, password: passInput.value }),
+          body: JSON.stringify({ username: userInput.value.trim(), password: passInput.value.trim() }),
         });
         const result = await res.json();
         if (!res.ok || !result.ok) throw new Error(result.error || "Login failed");
