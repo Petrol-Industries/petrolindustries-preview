@@ -131,12 +131,13 @@ document.addEventListener('DOMContentLoaded', () => {
       const data = new FormData(form);
       const name = (data.get('name') || '').toString().trim();
       const company = (data.get('company') || '').toString().trim();
+      const region = (data.get('region') || '').toString().trim();
       const email = (data.get('email') || '').toString().trim();
       const phone = (data.get('phone') || '').toString().trim();
       const message = (data.get('message') || '').toString().trim();
 
-      if (!name || !email || !message) {
-        setStatus('Please fill in your name, email and message.', true);
+      if (!name || !region || !email || !message) {
+        setStatus('Please fill in your name, region, email and message.', true);
         return;
       }
 
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const bodyLines = [
           `Name: ${name}`,
           company ? `Company: ${company}` : '',
+          `Region: ${region}`,
           `Email: ${email}`,
           phone ? `Phone: ${phone}` : '',
           '',
@@ -166,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const res = await fetch(endpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, company, email, phone, message, site })
+          body: JSON.stringify({ name, company, region, email, phone, message, site })
         });
         const result = await res.json();
         if (!res.ok || !result.ok) throw new Error(result.error || 'Send failed');

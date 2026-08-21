@@ -124,8 +124,8 @@ export default {
         });
       }
 
-      const { name, company, email, phone, message, site } = data;
-      if (!name || !email || !message) {
+      const { name, company, region, email, phone, message, site } = data;
+      if (!name || !region || !email || !message) {
         return new Response(JSON.stringify({ ok: false, error: "Missing required fields" }), {
           status: 400,
           headers: { "Content-Type": "application/json", ...corsHeaders(origin) },
@@ -135,10 +135,11 @@ export default {
       const toEmail = SITE_RECIPIENTS[site] || env.CONTACT_TO_EMAIL || "sales@petrolindustries.com";
       const fromEmail = env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
       const prefix = SITE_SUBJECT_PREFIXES[site] || "Form reply:";
-      const subject = `${prefix} ${company || name}`;
+      const subject = `${prefix} ${company || name} - ${region}`;
       const textBody = [
         `Name: ${name}`,
         company ? `Company: ${company}` : "",
+        `Region: ${region}`,
         `Email: ${email}`,
         phone ? `Phone: ${phone}` : "",
         site ? `Site: ${site}` : "",
