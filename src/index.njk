@@ -8,7 +8,7 @@ fullFooter: true
 permalink: "index.html"
 ---
 <section class="hero">
-  <div class="hero__media"><img src="{{ home.hero.image }}" alt="{{ home.hero.image_alt }}"></div>
+  <div class="hero__media"><img src="{{ home.hero.image | v }}" alt="{{ home.hero.image_alt }}"></div>
   <div class="hero__scrim"></div>
   <div class="hero__content">
     <div class="hero__season">{{ home.hero.season_label }}</div>
@@ -33,7 +33,7 @@ permalink: "index.html"
   <div class="container">
     <div class="dna reveal">
       <div class="dna__media">
-        <img src="{{ home.dna.image }}" alt="{{ home.dna.image_alt }}">
+        <img src="{{ home.dna.image | v }}" alt="{{ home.dna.image_alt }}">
         <div class="tag">{{ home.dna.image_tag }}</div>
       </div>
       <div class="dna__copy">
@@ -77,8 +77,8 @@ permalink: "index.html"
         <span class="cap">{{ item.caption }}</span>
       </div>
       {% else %}
-      <div class="gallery__item{% if item.size == 'wide' %} wide{% endif %}" data-lightbox="{{ item.image }}">
-        <img src="{{ item.image }}" loading="lazy" alt="{{ item.alt }}" style="object-position:{{ item.focal_x | default(50) }}% {{ item.focal_y | default(50) }}%;">
+      <div class="gallery__item{% if item.size == 'wide' %} wide{% endif %}" data-lightbox="{{ item.image | v }}">
+        <img src="{{ item.image | v }}" loading="lazy" alt="{{ item.alt }}" style="object-position:{{ item.focal_x | default(50) }}% {{ item.focal_y | default(50) }}%;">
         <span class="cap">{{ item.caption }}</span>
       </div>
       {% endif %}
