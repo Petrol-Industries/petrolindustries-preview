@@ -135,7 +135,7 @@ export default {
       const toEmail = SITE_RECIPIENTS[site] || env.CONTACT_TO_EMAIL || "sales@petrolindustries.com";
       const fromEmail = env.CONTACT_FROM_EMAIL || "onboarding@resend.dev";
       const prefix = SITE_SUBJECT_PREFIXES[site] || "Form reply:";
-      const subject = `${prefix} ${company || name} - ${region}`;
+      const subject = `${prefix} Region: ${region}, Company: ${company || name}`;
       const textBody = [
         `Name: ${name}`,
         company ? `Company: ${company}` : "",
