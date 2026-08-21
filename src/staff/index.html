@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff Editor — Petrol Industries</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="../assets/img/brand/favicon.png">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/staff.css">
+</head>
+<body class="staff-body">
+  <div class="staff-shell">
+    <h1>Petrol Industries — Content Editor</h1>
+    <div id="staff-app"></div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+  <script>
+    window.STAFF_CONFIG = {
+      site: "petrol",
+      apiBase: "https://petrol-cms-auth.teun-a4c.workers.dev"
+    };
+  </script>
+  <script src="../assets/js/staff.js"></script>
+</body>
+</html>
