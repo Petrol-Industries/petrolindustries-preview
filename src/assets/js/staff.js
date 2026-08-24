@@ -578,6 +578,23 @@
       )
     );
 
+    frag.appendChild(
+      section(
+        "Social Links",
+        (() => {
+          data.social = data.social || {};
+          const c = h("div", {});
+          c.appendChild(h("p", { class: "sf-status", text: "Leave a URL blank to hide that icon from the site footer." }));
+          c.appendChild(field("Instagram URL", "social.instagram", data.social.instagram));
+          c.appendChild(field("Facebook URL", "social.facebook", data.social.facebook));
+          c.appendChild(field("TikTok URL", "social.tiktok", data.social.tiktok));
+          c.appendChild(field("LinkedIn URL", "social.linkedin", data.social.linkedin));
+          return c;
+        })(),
+        (body) => saveFile("site", (obj) => collect(body, obj))
+      )
+    );
+
     return frag;
   }
 

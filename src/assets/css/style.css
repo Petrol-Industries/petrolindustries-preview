@@ -281,6 +281,9 @@ button{ font-family:inherit; cursor:pointer; }
 .footer a:hover{ color:var(--gold-cta); }
 .footer__countries{ font-size:13.5px; line-height:1.9; color:rgba(241,236,225,0.55); font-weight:300; }
 .footer__bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:26px; font-size:12.5px; color:rgba(241,236,225,0.45); flex-wrap:wrap; gap:12px; }
+.social-links{ display:flex; align-items:center; gap:16px; }
+.social-links a{ display:flex; color:rgba(241,236,225,0.75); }
+.social-links a:hover{ color:var(--gold-cta); }
 
 /* ---------- Page header (inner pages) ---------- */
 .page-head{

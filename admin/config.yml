@@ -194,3 +194,12 @@ collections:
               - { label: "Countries List", name: "countries", widget: "text" }
               - { label: "Legal Line (left)", name: "legal", widget: "string" }
               - { label: "Legal Line (right)", name: "legal_right", widget: "string" }
+          - label: "Social Links"
+            name: "social"
+            widget: "object"
+            hint: "Leave a field blank to hide that icon from the site footer."
+            fields:
+              - { label: "Instagram URL", name: "instagram", widget: "string", required: false }
+              - { label: "Facebook URL", name: "facebook", widget: "string", required: false }
+              - { label: "TikTok URL", name: "tiktok", widget: "string", required: false }
+              - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
