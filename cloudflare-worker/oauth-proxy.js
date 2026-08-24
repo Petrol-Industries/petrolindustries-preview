@@ -7,8 +7,9 @@
  *      directly on the live site WITHOUT ever giving them a GitHub account or repo
  *      access. This Worker holds a GitHub service token that does the actual
  *      commits on their behalf, scoped to a fixed allowlist of content files and
- *      a "must already exist under src/assets/img/" rule for image replacement —
- *      they can never touch templates, CSS, JS, or the deploy workflow.
+ *      a "plain filename directly under src/assets/img/, real image extension
+ *      only" rule for image create/replace — they can never touch templates,
+ *      CSS, JS, or the deploy workflow.
  *
  * This one Worker backs BOTH the Petrol and Indigold season preview sites — no
  * need to deploy a second Worker or set up a second OAuth App / service token.
@@ -380,25 +381,25 @@ export default {
       if (!repo || !path || !contentBase64) {
         return jsonResponse({ ok: false, error: "Invalid request" }, 400, origin);
       }
-      // Images may only be REPLACED, never created or moved: must already exist
-      // under src/assets/img/, and no path traversal.
-      if (!path.startsWith("src/assets/img/") || path.includes("..")) {
+      // Images may be created OR replaced, but ONLY as a plain filename directly
+      // under src/assets/img/ with a real image extension — this is the one
+      // place staff can ever add a new file, and it's fenced off from every
+      // other path in the repo (no subfolders, no traversal, no other types).
+      const validPath = /^src\/assets\/img\/[a-zA-Z0-9_-]+\.(jpg|jpeg|png|webp|gif)$/.test(path);
+      if (!validPath) {
         return jsonResponse({ ok: false, error: "Path not allowed" }, 403, origin);
       }
 
       const existingRes = await githubApi(`/repos/${repo}/contents/${path}`, env);
-      if (!existingRes.ok) {
-        return jsonResponse({ ok: false, error: "That image does not exist yet — only existing images can be replaced" }, 404, origin);
-      }
-      const existing = await existingRes.json();
+      const existing = existingRes.ok ? await existingRes.json() : null;
 
       const putRes = await githubApi(`/repos/${repo}/contents/${path}`, env, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          message: `Image replaced by ${user} via staff editor`,
+          message: existing ? `Image replaced by ${user} via staff editor` : `Image added by ${user} via staff editor`,
           content: contentBase64,
-          sha: existing.sha,
+          ...(existing ? { sha: existing.sha } : {}),
           branch: "main",
         }),
       });

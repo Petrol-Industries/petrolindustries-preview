@@ -46,8 +46,26 @@ body.staff-body{
 .sf-field textarea{ resize:vertical; }
 
 .sf-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.sf-row--removable{ grid-template-columns:1fr auto; align-items:end; }
 .sf-tile{ border:1px dashed var(--line-strong); border-radius:3px; padding:14px; display:flex; flex-direction:column; gap:12px; }
 .sf-tile h4{ margin:0; font-size:13px; text-transform:uppercase; letter-spacing:0.04em; color:var(--red); }
+
+.sf-tile-header{ display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.sf-tile-header h4{ margin:0; }
+
+.sf-remove{
+  background:transparent; border:1px solid #ac3a24; color:#ac3a24; padding:8px 14px; border-radius:2px;
+  font-size:12px; text-transform:uppercase; letter-spacing:0.05em; font-weight:600; white-space:nowrap;
+}
+.sf-remove:hover{ background:rgba(172,58,36,0.08); }
+
+.sf-addbar{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding-top:4px; }
+.sf-add{
+  background:transparent; border:1px dashed var(--line-strong); color:var(--ink); padding:10px 18px; border-radius:2px;
+  font-size:13px; text-transform:uppercase; letter-spacing:0.05em; font-weight:600;
+}
+.sf-add:hover{ background:var(--paper-2); }
+.sf-add:disabled{ opacity:0.6; cursor:default; }
 
 .sf-preview{ width:140px; height:auto; border-radius:2px; border:1px solid var(--line); object-fit:cover; }
 .sf-image-field input[type="file"]{ font-size:13px; }

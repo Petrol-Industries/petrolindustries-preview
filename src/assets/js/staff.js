@@ -2,7 +2,7 @@
  * Staff content editor — no GitHub account needed.
  * Talks only to the Cloudflare Worker's /staff-* API, which holds the real
  * GitHub credentials. This page can only ever touch the four known content
- * files and existing images under src/assets/img/ — nothing else.
+ * files and images under src/assets/img/ — nothing else.
  *
  * Expects `window.STAFF_CONFIG = { site: 'petrol'|'indigold', apiBase: '...' }`
  * to be set by an inline script in the host HTML page before this file loads.
@@ -61,6 +61,18 @@
     input.value = value == null ? "" : value;
     wrap.appendChild(input);
     return wrap;
+  }
+
+  function removeButton(text, onClick) {
+    const btn = h("button", { type: "button", class: "sf-remove", text: text || "Remove" });
+    btn.addEventListener("click", onClick);
+    return btn;
+  }
+
+  function addButton(text, onClick) {
+    const btn = h("button", { type: "button", class: "sf-add", text });
+    btn.addEventListener("click", onClick);
+    return btn;
   }
 
   function section(title, contentEl, onSave) {
@@ -154,6 +166,22 @@
     return wrap;
   }
 
+  // Uploads a brand-new image file (used when adding a gallery tile, before
+  // any YAML field references it yet). Returns the site-relative path.
+  async function uploadNewImage(file) {
+    const ext = file.type === "image/png" ? "png" : "jpg";
+    const imagePath = `assets/img/tile-${Date.now()}.${ext}`;
+    const contentBase64 = await compressImageForUpload(file, imagePath);
+    const res = await api("/staff-image", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ site: CONFIG.site, path: `src/${imagePath}`, contentBase64 }),
+    });
+    const result = await res.json();
+    if (!res.ok || !result.ok) throw new Error(result.error || "Upload failed");
+    return imagePath;
+  }
+
   function blobToBase64(blob) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -228,43 +256,124 @@
       )
     );
 
-    frag.appendChild(
-      section(
-        "Brand Values",
-        (() => {
-          const c = h("div", {});
-          data.values.forEach((v, i) => c.appendChild(field(`Value ${v.num}`, `values.${i}.label`, v.label)));
-          return c;
-        })(),
-        (body) => saveFile("home", (obj) => collect(body, obj))
-      )
-    );
-
-    frag.appendChild(
-      section(
-        "Gallery",
-        (() => {
-          const c = h("div", {});
-          c.appendChild(field("Eyebrow", "gallery.eyebrow", data.gallery.eyebrow));
-          c.appendChild(field("Heading", "gallery.heading", data.gallery.heading));
-          c.appendChild(field("Intro", "gallery.intro", data.gallery.intro, "textarea"));
-          data.gallery.items.forEach((item, i) => {
-            const tileWrap = h("div", { class: "sf-tile" });
-            tileWrap.appendChild(h("h4", { text: `Tile ${i + 1} (${item.type === "video" ? "video" : item.size || "normal"})` }));
-            if (item.type === "video") {
-              tileWrap.appendChild(field("YouTube video ID", `gallery.items.${i}.youtube_id`, item.youtube_id));
-            } else {
-              tileWrap.appendChild(imageField("Photo", item.image, null));
-            }
-            tileWrap.appendChild(field("Caption", `gallery.items.${i}.caption`, item.caption));
-            tileWrap.appendChild(field("Alt text", `gallery.items.${i}.alt`, item.alt));
-            c.appendChild(tileWrap);
+    // ---- Brand Values: supports add/remove ----
+    let valuesSectionEl;
+    function buildValuesBody() {
+      const c = h("div", {});
+      data.values.forEach((v, i) => {
+        const row = h("div", { class: "sf-row sf-row--removable" });
+        row.appendChild(field(`Value ${i + 1}`, `values.${i}.label`, v.label));
+        row.appendChild(
+          removeButton("Remove", () => {
+            if (!confirm(`Remove "${v.label}"? Click Save afterwards to make it permanent.`)) return;
+            collect(c, data); // keep any not-yet-saved edits in other rows
+            data.values.splice(i, 1);
+            rerenderValues();
+          })
+        );
+        c.appendChild(row);
+      });
+      c.appendChild(
+        addButton("+ Add value", () => {
+          collect(c, data);
+          data.values.push({ num: "", label: "New value" });
+          rerenderValues();
+        })
+      );
+      return c;
+    }
+    function buildValuesSection() {
+      return section("Brand Values", buildValuesBody(), (body) =>
+        saveFile("home", (obj) => {
+          collect(body, obj);
+          // Numbering is purely positional — always renumber on save so
+          // adding/removing values never leaves gaps or duplicates.
+          obj.values.forEach((v, i) => {
+            v.num = String(i + 1).padStart(2, "0");
           });
-          return c;
-        })(),
-        (body) => saveFile("home", (obj) => collect(body, obj))
-      )
-    );
+        })
+      );
+    }
+    function rerenderValues() {
+      const fresh = buildValuesSection();
+      valuesSectionEl.replaceWith(fresh);
+      valuesSectionEl = fresh;
+    }
+    valuesSectionEl = buildValuesSection();
+    frag.appendChild(valuesSectionEl);
+
+    // ---- Gallery: supports add/remove tiles ----
+    let gallerySectionEl;
+    function buildGalleryBody() {
+      const c = h("div", {});
+      c.appendChild(field("Eyebrow", "gallery.eyebrow", data.gallery.eyebrow));
+      c.appendChild(field("Heading", "gallery.heading", data.gallery.heading));
+      c.appendChild(field("Intro", "gallery.intro", data.gallery.intro, "textarea"));
+
+      data.gallery.items.forEach((item, i) => {
+        const tileWrap = h("div", { class: "sf-tile" });
+        const headerRow = h("div", { class: "sf-tile-header" }, [
+          h("h4", { text: `Tile ${i + 1} (${item.type === "video" ? "video" : item.size || "normal"})` }),
+          removeButton("Remove tile", () => {
+            if (!confirm(`Remove Tile ${i + 1}? Click Save afterwards to make it permanent.`)) return;
+            collect(c, data); // keep any not-yet-saved edits in other tiles
+            data.gallery.items.splice(i, 1);
+            rerenderGallery();
+          }),
+        ]);
+        tileWrap.appendChild(headerRow);
+        if (item.type === "video") {
+          tileWrap.appendChild(field("YouTube video ID", `gallery.items.${i}.youtube_id`, item.youtube_id));
+        } else {
+          tileWrap.appendChild(imageField("Photo", item.image, null));
+        }
+        tileWrap.appendChild(field("Caption", `gallery.items.${i}.caption`, item.caption));
+        tileWrap.appendChild(field("Alt text", `gallery.items.${i}.alt`, item.alt));
+        c.appendChild(tileWrap);
+      });
+
+      const addStatus = h("span", { class: "sf-status" });
+      const addPhotoBtn = addButton("+ Add photo tile", () => {
+        const tempInput = h("input", { type: "file", accept: "image/*" });
+        tempInput.addEventListener("change", async () => {
+          const file = tempInput.files[0];
+          if (!file) return;
+          addPhotoBtn.disabled = true;
+          addVideoBtn.disabled = true;
+          addStatus.textContent = "Uploading photo…";
+          addStatus.className = "sf-status";
+          try {
+            const imagePath = await uploadNewImage(file);
+            collect(c, data); // keep any not-yet-saved edits in other tiles
+            data.gallery.items.push({ image: imagePath, alt: "", caption: "", size: "normal", focal_x: 50, focal_y: 50 });
+            rerenderGallery();
+          } catch (err) {
+            addStatus.textContent = err.message || "Upload failed";
+            addStatus.className = "sf-status sf-status--error";
+            addPhotoBtn.disabled = false;
+            addVideoBtn.disabled = false;
+          }
+        });
+        tempInput.click();
+      });
+      const addVideoBtn = addButton("+ Add video tile", () => {
+        collect(c, data);
+        data.gallery.items.push({ type: "video", youtube_id: "", alt: "", caption: "", size: "normal" });
+        rerenderGallery();
+      });
+      c.appendChild(h("div", { class: "sf-addbar" }, [addPhotoBtn, addVideoBtn, addStatus]));
+      return c;
+    }
+    function buildGallerySection() {
+      return section("Gallery", buildGalleryBody(), (body) => saveFile("home", (obj) => collect(body, obj)));
+    }
+    function rerenderGallery() {
+      const fresh = buildGallerySection();
+      gallerySectionEl.replaceWith(fresh);
+      gallerySectionEl = fresh;
+    }
+    gallerySectionEl = buildGallerySection();
+    frag.appendChild(gallerySectionEl);
 
     frag.appendChild(
       section(
@@ -301,44 +410,105 @@
   }
 
   function renderContacts(data) {
-    const frag = h("div", {});
-    frag.appendChild(
-      section(
-        "Page Header",
-        (() => {
-          const c = h("div", {});
-          c.appendChild(field("Eyebrow", "page.eyebrow", data.page.eyebrow));
-          c.appendChild(field("Heading", "page.heading", data.page.heading));
-          c.appendChild(field("Intro", "page.intro", data.page.intro, "textarea"));
-          c.appendChild(field("Footnote", "footnote", data.footnote, "textarea"));
-          return c;
-        })(),
-        (body) => saveFile("contacts", (obj) => collect(body, obj))
-      )
-    );
+    let fragEl;
+    let groupEls = [];
 
-    data.groups.forEach((group, gi) => {
+    function buildGroupBody(gi) {
+      const group = data.groups[gi];
+      const c = h("div", {});
+      c.appendChild(field("Group label (shown as the section heading)", `groups.${gi}.label`, group.label));
+      group.people.forEach((p, pi) => {
+        const pWrap = h("div", { class: "sf-tile" });
+        pWrap.appendChild(
+          h("div", { class: "sf-tile-header" }, [
+            h("h4", { text: p.name || p.region || `Contact ${pi + 1}` }),
+            removeButton("Remove", () => {
+              if (!confirm(`Remove ${p.name || "this contact"}? Click Save afterwards to make it permanent.`)) return;
+              collect(c, data); // keep any not-yet-saved edits in other contacts
+              group.people.splice(pi, 1);
+              rerenderGroup(gi);
+            }),
+          ])
+        );
+        pWrap.appendChild(field("Region / Title", `groups.${gi}.people.${pi}.region`, p.region));
+        pWrap.appendChild(field("Name", `groups.${gi}.people.${pi}.name`, p.name));
+        pWrap.appendChild(field("Email", `groups.${gi}.people.${pi}.email`, p.email));
+        pWrap.appendChild(field("Phone (displayed)", `groups.${gi}.people.${pi}.phone_display`, p.phone_display));
+        pWrap.appendChild(field("Phone (tel: link, e.g. +31612345678)", `groups.${gi}.people.${pi}.phone_tel`, p.phone_tel));
+        c.appendChild(pWrap);
+      });
+      c.appendChild(
+        addButton("+ Add contact", () => {
+          collect(c, data);
+          group.people.push({ region: "", name: "", email: "", phone_display: "", phone_tel: "" });
+          rerenderGroup(gi);
+        })
+      );
+      c.appendChild(
+        removeButton("Remove entire group", () => {
+          if (!confirm(`Remove the whole "${group.label}" group and all its contacts? Click Save afterwards to make it permanent.`)) return;
+          collect(fragEl, data); // keep any not-yet-saved edits across the whole page
+          data.groups.splice(gi, 1);
+          rerenderAll();
+        })
+      );
+      return c;
+    }
+
+    function buildGroupSection(gi) {
+      const group = data.groups[gi];
+      return section(`Group: ${group.label}`, buildGroupBody(gi), (body) =>
+        saveFile("contacts", (obj) => collect(body, obj))
+      );
+    }
+
+    function rerenderGroup(gi) {
+      const fresh = buildGroupSection(gi);
+      groupEls[gi].replaceWith(fresh);
+      groupEls[gi] = fresh;
+    }
+
+    function build() {
+      const frag = h("div", {});
       frag.appendChild(
         section(
-          `Group: ${group.label}`,
+          "Page Header",
           (() => {
             const c = h("div", {});
-            group.people.forEach((p, pi) => {
-              const pWrap = h("div", { class: "sf-tile" });
-              pWrap.appendChild(h("h4", { text: p.region }));
-              pWrap.appendChild(field("Name", `groups.${gi}.people.${pi}.name`, p.name));
-              pWrap.appendChild(field("Email", `groups.${gi}.people.${pi}.email`, p.email));
-              pWrap.appendChild(field("Phone (displayed)", `groups.${gi}.people.${pi}.phone_display`, p.phone_display));
-              c.appendChild(pWrap);
-            });
+            c.appendChild(field("Eyebrow", "page.eyebrow", data.page.eyebrow));
+            c.appendChild(field("Heading", "page.heading", data.page.heading));
+            c.appendChild(field("Intro", "page.intro", data.page.intro, "textarea"));
+            c.appendChild(field("Footnote", "footnote", data.footnote, "textarea"));
             return c;
           })(),
           (body) => saveFile("contacts", (obj) => collect(body, obj))
         )
       );
-    });
 
-    return frag;
+      groupEls = data.groups.map((_, gi) => buildGroupSection(gi));
+      groupEls.forEach((el) => frag.appendChild(el));
+
+      frag.appendChild(
+        h("div", { class: "sf-addbar" }, [
+          addButton("+ Add region group", () => {
+            collect(fragEl, data); // keep any not-yet-saved edits across the whole page
+            data.groups.push({ label: "New Region", people: [] });
+            rerenderAll();
+          }),
+        ])
+      );
+
+      return frag;
+    }
+
+    function rerenderAll() {
+      const fresh = build();
+      fragEl.replaceWith(fresh);
+      fragEl = fresh;
+    }
+
+    fragEl = build();
+    return fragEl;
   }
 
   function renderContact(data) {
