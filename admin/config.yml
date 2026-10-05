@@ -138,9 +138,6 @@ collections:
                 fields:
                   - { label: "Region / Role", name: "region", widget: "string" }
                   - { label: "Name", name: "name", widget: "string" }
-                  - { label: "Email", name: "email", widget: "string" }
-                  - { label: "Phone (as displayed)", name: "phone_display", widget: "string" }
-                  - { label: "Phone (for click-to-call, e.g. +31612345678)", name: "phone_tel", widget: "string" }
           - { label: "Footnote", name: "footnote", widget: "text" }
 
   - name: "contact"

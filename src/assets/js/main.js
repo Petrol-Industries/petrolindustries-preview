@@ -84,36 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
   }
 
-  /* vCard download for sales contacts */
-  document.querySelectorAll('[data-vcard]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const name = btn.getAttribute('data-name') || 'Petrol Industries';
-      const role = btn.getAttribute('data-role') || '';
-      const email = btn.getAttribute('data-email') || '';
-      const phone = btn.getAttribute('data-phone') || '';
-      const vcard = [
-        'BEGIN:VCARD',
-        'VERSION:3.0',
-        `N:${name};;;;`,
-        `FN:${name}`,
-        `ORG:Petrol Industries`,
-        `TITLE:${role}`,
-        email ? `EMAIL:${email}` : '',
-        phone ? `TEL:${phone}` : '',
-        'END:VCARD'
-      ].filter(Boolean).join('\n');
-      const blob = new Blob([vcard], { type: 'text/vcard' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${name.replace(/\s+/g, '_') || 'contact'}.vcf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
-  });
-
   /* Contact form -> Cloudflare Worker submission (mailto fallback) */
   const form = document.querySelector('#contact-form');
   if (form) {

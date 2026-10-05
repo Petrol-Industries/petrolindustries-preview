@@ -432,15 +432,12 @@
         );
         pWrap.appendChild(field("Region / Title", `groups.${gi}.people.${pi}.region`, p.region));
         pWrap.appendChild(field("Name", `groups.${gi}.people.${pi}.name`, p.name));
-        pWrap.appendChild(field("Email", `groups.${gi}.people.${pi}.email`, p.email));
-        pWrap.appendChild(field("Phone (displayed)", `groups.${gi}.people.${pi}.phone_display`, p.phone_display));
-        pWrap.appendChild(field("Phone (tel: link, e.g. +31612345678)", `groups.${gi}.people.${pi}.phone_tel`, p.phone_tel));
         c.appendChild(pWrap);
       });
       c.appendChild(
         addButton("+ Add contact", () => {
           collect(c, data);
-          group.people.push({ region: "", name: "", email: "", phone_display: "", phone_tel: "" });
+          group.people.push({ region: "", name: "" });
           rerenderGroup(gi);
         })
       );

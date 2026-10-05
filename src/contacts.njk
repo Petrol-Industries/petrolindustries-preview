@@ -27,11 +27,9 @@ permalink: "contacts.html"
           <div class="contact-card__region">{{ person.region }}</div>
           <div class="contact-card__box">
             <strong>{{ person.name }}</strong>
-            <a href="mailto:{{ person.email }}">{{ person.email }}</a><br>
-            <a href="tel:{{ person.phone_tel }}">{{ person.phone_display }}</a>
           </div>
         </div>
-        <button class="vcard-btn" data-vcard data-name="{{ person.name }}" data-role="{{ person.region }}" data-email="{{ person.email }}" data-phone="{{ person.phone_tel }}">Download Contact</button>
+        <a href="contact.html" class="vcard-btn">Send a message</a>
       </div>
       {% endfor %}
     </div>
